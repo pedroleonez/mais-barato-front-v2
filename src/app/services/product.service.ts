@@ -15,27 +15,32 @@ export class ProductService {
   constructor() { }
 
   // add product
-  addProduct(product: Product): Observable<string> {
-    return this.http.post<string>(this.API+'/add', product, {responseType: 'text' as 'json'});
+  addProduct(product: Product): Observable<void> {
+    return this.http.post<void>(`${this.API}/add`, product);
   }
 
   // update product
-  updateProduct(product: Product, id: number): Observable<string> {
-    return this.http.put<string>(this.API+'/update'+id, product, {responseType: 'text' as 'json'});
+  updateProduct(product: Product, id: number): Observable<void> {
+    return this.http.put<void>(`${this.API}/update/${id}`, product);
   }
 
   // delete product
-  deleteProduct(id: number): Observable<string> {
-    return this.http.delete<string>(this.API+'/delete'+id, {responseType: 'text' as 'json'});
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.API}/delete/${id}`);
   }
 
   // list products
   listProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.API+'/list');
+    return this.http.get<Product[]>(`${this.API}/list`);
   }
 
   // get product by id
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.API+'/get'+id);
+    return this.http.get<Product>(`${this.API}/getById/${id}`);
+  }
+
+  // get best option
+  getBestOption(id:number): Observable<string> {
+    return this.http.get<string>(`${this.API}/bestOption/${id}`);
   }
 }
